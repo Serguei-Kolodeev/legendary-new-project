@@ -1,0 +1,23 @@
+shift   = lambda inp: bool(inp) and (inp[0], inp[1:])
+
+nothing = lambda inp: (None, inp)
+
+filt = lambda predicate: (
+         lambda parser:
+           lambda inp: (m:=parser(inp)) and predicate(m[0]) and m)
+           
+
+filt = lambda predicate: (
+         lambda parser:
+           lambda inp:
+             (lambda m: m and predicate(m[0]) and m)(parser(inp)))
+
+
+digit = filt(str.isdigit)(shift)
+const digit = filt(str => str.match(/\d/))(shift);
+const digit = filt((str) => {
+  return str.match(/[0-9]/);
+})(shift);
+
+letter = filt(str.isalpha)(shift)
+const letter = filt(str => str.match(/[a-zA-Z]/))(shift);

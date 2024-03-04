@@ -1,0 +1,12 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 1px;
+    padding: 25px;
+    margin-bottom: 10px;
+    font-size: large;
+    background-color:  #293133;
+    color: #FFCBDB;
+    font-weight: bolder;
+}

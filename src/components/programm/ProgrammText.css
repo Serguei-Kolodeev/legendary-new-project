@@ -1,0 +1,10 @@
+.programm_line {
+  padding-left: 10px;
+  color: #ececec;
+  font-weight: 400;
+}
+
+.programm_line:hover {
+  background-color: #828282;
+  cursor: pointer;
+}

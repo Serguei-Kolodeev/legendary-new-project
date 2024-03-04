@@ -1,0 +1,31 @@
+.no_error {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.error {
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+  background-color: #ffcbdb;
+  color: #293133;
+  border-radius: 5px;
+}
+
+.error:hover {
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+  color: #ffcbdb;
+  border: 1px solid #ffcbdb;
+  border-radius: 5px;
+}
+
+:where(.address, .fewCyrilicLetter):hover {
+  background-color: #444444;
+  padding-left: 1px;
+  padding-right: 1px;
+  border-radius: 5px;
+}

@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/header/Header";
+import ProgrammBody from "./components/programm/ProgrammBody";
+import '../src/App.css'
 
-function App() {
+
+
+
+const App = () => {
+  const [programmText, setProgrammText] = React.useState(["зэдся будэ текст программэ"])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/*<CMPProgramm/>*/}
+      {/*<LeftSideBar/>*/}
+      <Header onProgrammChange = {setProgrammText}/>
+      <ProgrammBody programmText = {programmText}/>
+      {/*<Footer/>*/}
     </div>
   );
-}
+};
 
 export default App;
