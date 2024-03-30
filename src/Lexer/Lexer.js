@@ -2,7 +2,7 @@ import { tokenTypesList } from "../tokens/TokenType";
 
 export default class Lexer {
   tokenList = [];
-  workObject = {
+  codeObject = {
     pointer: 0,
     code: [], //"G00 G43 H1 D1 Z27.0 [#45];",
     result: "",
@@ -41,18 +41,18 @@ export default class Lexer {
   };
 
   constructor(code) {
-    this.workObject.code = code;
+    this.codeObject.code = code;
   }
 
   lexAnalysys = () => {
-    if (this.code !== undefined) {
-      while (this.nextToken()) {
+    if (this.codeObject.code !== undefined) {
+      while (!this.codeObject.isEndString) {
         /* empty */
       }
     }
   };
 
-  nextToken = () => {
+  getToken = () => {
     let pos = 0;
     const tokenTypesValues = Object.values(tokenTypesList);
     let tokenType;
