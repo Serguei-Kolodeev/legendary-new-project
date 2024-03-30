@@ -6,6 +6,26 @@ const isDot = (character) => {
   return /[.]/.test(character);
 };
 
+export const digital1 = (wObj) => {
+  //console.log(wObj)
+  let token = false;
+  //let {pointer, code, result} = wObj;
+  //result = ""
+  while (isDigit(wObj.getCharacter())) {
+    wObj.setResult();
+    wObj.shiftPointer();
+  }
+  wObj.isEndString();
+  //console.log(wObj.isResult())
+  token = wObj.isResult();
+  //console.log('td: ' + token)
+  if (token) {
+    console.log(wObj.getResult() + " (isDigit) => " + wObj.getTail());
+  }
+  //[wObj.pointer, wObj.result] = [pointer, result]
+  return token;
+};
+
 export const digital = (pointer, inputString) => {
   let obj = {
     result: undefined,

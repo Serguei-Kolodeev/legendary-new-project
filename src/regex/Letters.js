@@ -6,6 +6,26 @@ const isCyrilicLetter = (character) => {
   return /[а-яА-ЯЁё]/.test(character);
 };
 
+export const latinLetter1 = (wObj) => {
+  //console.log(wObj)
+  let token = false;
+  //let {pointer, code, result} = wObj;
+  //result = ""
+  if (isLetter(wObj.getCharacter())) {
+    wObj.setResult();
+    wObj.shiftPointer();
+  }
+  wObj.isEndString();
+  //console.log(wObj.isResult())
+  token = wObj.isResult();
+  //console.log('tl: ' + token)
+  if (token) {
+    console.log(wObj.getResult() + " (isLatinLetter) => " + wObj.getTail());
+  }
+  //[wObj.pointer, wObj.result] = [pointer, result]
+  return token;
+};
+
 export const cyrilicLetter = (pointer, inputString) => {
   let obj = {
     result: undefined,

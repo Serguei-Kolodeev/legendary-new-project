@@ -1,4 +1,4 @@
-import * as regx from "..//regex/Regex";
+import * as regx from "../regex/Regex";
 
 export default class TokenType {
   name;
@@ -11,17 +11,16 @@ export default class TokenType {
 }
 
 export const tokenTypesList = {
-  ADDRESS: new TokenType("ADDRESS", regx.latinLetter),
-  NUMBER: new TokenType("NUMBER", regx.digital),
-  LATLETTERS: new TokenType("LATLETTERS", regx.fewLatinLetter),
-  CYRLETTERS: new TokenType("CYRLETTERS", regx.cyrilicLetter),
+  LATINLETTER: new TokenType("LATINLETTER", regx.letters),
+  NUMBER: new TokenType("NUMBER", regx.digits),
   SEMICOLON: new TokenType("SEMICOLON", regx.semiColon),
   SPACE: new TokenType("SPACE", regx.space),
   //ASSIGN: new TokenType("ASSIGN", "РАВНО"),
   //LOG: new TokenType("LOG", "КОНСОЛЬ"),
-  MATHOPERATION: new TokenType("PLUS", regx.mathOperation),
+  //MATHOPERATION: new TokenType("PLUS", regx.mathOperation),
   //MINUS: new TokenType("MINUS", "МИНУС"),
-  OPENROUNDBRACKET: new TokenType("LPAR", regx.openRoundBracket),
-  CLOSEROUNDBRACKET: new TokenType("RPAR", regx.closeRoundBracket),
-  SLASH: new TokenType("RPAR", regx.slash),
+  //OPENROUNDBRACKET: new TokenType("LPAR", regx.openRoundBracket),
+  //CLOSEROUNDBRACKET: new TokenType("RPAR", regx.closeRoundBracket),
+  //SLASH: new TokenType("RPAR", regx.slash),
+  OTHER: new TokenType("OTHER", regx.others),
 };
