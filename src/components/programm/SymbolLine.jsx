@@ -1,57 +1,10 @@
 import "../programm/SymbolLine.css";
-import rules from "./RegexRules";
+import Lexer from "../../Lexer/Lexer";
 
 const readStreamSymbols = (symbolsLine) => {
-  let result = [];
-  let [pointer, obj] = [0, undefined];
-  if (symbolsLine !== undefined) {
-    while (symbolsLine[pointer] !== undefined) {
-      [pointer, obj] = rules.address(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
+  let lexer = new Lexer(symbolsLine);
 
-      [pointer, obj] = rules.latinLetter(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
-
-      [pointer, obj] = rules.signumDigit(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
-
-      [pointer, obj] = rules.digital(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
-
-      [pointer, obj] = rules.cyrilicLetter(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
-
-      [pointer, obj] = rules.space(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
-
-      [pointer, obj] = rules.mathOperation(pointer, symbolsLine);
-      if (obj.result !== undefined) {
-        result.push(obj);
-        continue;
-      }
-
-      [pointer, obj] = rules.otherSymbol(pointer, symbolsLine);
-      result.push(obj);
-    }
-  }
+  let result = lexer.lexAnalysys();
   return result;
 };
 

@@ -1,4 +1,5 @@
 import { tokenTypesList } from "../tokens/TokenType";
+import Token from "../tokens/Token";
 
 export default class Lexer {
   tokenList = [];
@@ -45,28 +46,42 @@ export default class Lexer {
   }
 
   lexAnalysys = () => {
+    let token = undefined;
+    let tokens = [];
     if (this.codeObject.code !== undefined) {
       while (!this.codeObject.isEndString) {
-        /* empty */
+        token = this.getToken();
+        if (token !== undefined) {
+          tokens.push(new Token(token.name));
+        }
       }
     }
+    return tokens;
   };
 
   getToken = () => {
-    let pos = 0;
     const tokenTypesValues = Object.values(tokenTypesList);
     let tokenType;
-    let token;
-    let [pointer, obj] = [0, undefined];
+    let tokenTypePointer = 0;
+    let isToken = false;
 
-    //здесь должен получить токен
-    token = this.code[pointer];
-    //здесь проверяю на тип токена
-    while (tokenTypesValues[pos] !== undefined && token !== undefined) {
-      tokenType = tokenTypesValues[pos];
-      [pointer, obj] = tokenType.regex();
-      pos = +1;
+    while (tokenTypesValues[tokenTypePointer] !== undefined) {
+      this.codeObject.clearResult();
+      tokenType = tokenTypesValues[tokenTypePointer];
+      isToken = tokenType.regex(this.codeObject);
+      if (isToken) {
+        tokenType.text = this.codeObject.getResult();
+        console.log(
+          tokenType.name +
+            ": " +
+            tokenType.text +
+            " => " +
+            this.codeObject.getTail()
+        );
+        break;
+      }
+      tokenTypePointer = +1;
     }
-    return this.code[pointer] === undefined;
+    return tokenType;
   };
 }
