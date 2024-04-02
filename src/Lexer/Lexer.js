@@ -2,11 +2,11 @@ import { tokenTypesList } from "../tokens/TokenType";
 import Token from "../tokens/Token";
 
 export default class Lexer {
-  tokenList = [];
   codeObject = {
     pointer: 0,
     code: [], //"G00 G43 H1 D1 Z27.0 [#45];",
     result: "",
+    tokenType: "",
     shiftPointer() {
       ++this.pointer;
     },
@@ -40,6 +40,7 @@ export default class Lexer {
       return isResult;
     },
   };
+  tokenTypesValues = Object.values(tokenTypesList);
 
   constructor(code) {
     this.codeObject.code = code;
@@ -52,7 +53,7 @@ export default class Lexer {
       while (!this.codeObject.isEndString) {
         token = this.getToken();
         if (token !== undefined) {
-          tokens.push(new Token(token.name));
+          tokens.push(new Token(token.type, token.text));
         }
       }
     }
@@ -60,14 +61,13 @@ export default class Lexer {
   };
 
   getToken = () => {
-    const tokenTypesValues = Object.values(tokenTypesList);
     let tokenType;
     let tokenTypePointer = 0;
     let isToken = false;
 
-    while (tokenTypesValues[tokenTypePointer] !== undefined) {
+    while (this.tokenTypesValues[tokenTypePointer] !== undefined) {
       this.codeObject.clearResult();
-      tokenType = tokenTypesValues[tokenTypePointer];
+      tokenType = this.tokenTypesValues[tokenTypePointer];
       isToken = tokenType.regex(this.codeObject);
       if (isToken) {
         tokenType.text = this.codeObject.getResult();
