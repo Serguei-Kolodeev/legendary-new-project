@@ -1,22 +1,19 @@
-import ProgrammText from "../programm/ProgrammText";
-import '../programm/ProgrammBody.css'
+import ProgrammText from "./ProgrammText";
+import "../programm/ProgrammBody.css";
 
-const ProgrammBody = ({programmText} : any) => {
-  
-  const text : string [] = programmText.toString().split(/\r\n/);
+const ProgrammBody = ({ programmText }: any) => {
+  const text = programmText.toString().split(/\r\n/);
   //console.log(text)
   if (text !== undefined) {
     return (
       <div className="programm_body">
-        {text.map((value: string, index : number) => (
-          <ProgrammText key = {index} text = {value}/>
+        {text.map((value: string, index: number) => (
+          <ProgrammText key={index} text={value} />
         ))}
       </div>
     );
   } else {
-    return (
-      <p>Текст программы не загружен</p>
-    );
+    return <p>Текст программы не загружен</p>;
   }
 };
 

@@ -1,7 +1,7 @@
 import "../programm/ProgrammText.css";
-import SymbolLine from "../programm/SymbolLine.jsx";
+import SymbolLine from "./SymbolLine";
 
-const ProgrammText = ({ text }: any) => {
+const ProgrammText = ({ text }: { text: string }) => {
   //console.log(text)
   //<div className="programm_line">{text}</div>
   return (

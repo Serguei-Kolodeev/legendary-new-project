@@ -1,9 +1,9 @@
 export default class Token {
   type;
-  text;
+  value;
 
-  constructor(type, text) {
+  constructor(type, value) {
     this.type = type;
-    this.text = text;
+    this.value = value;
   }
 }

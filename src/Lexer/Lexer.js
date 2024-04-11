@@ -1,56 +1,19 @@
 import { tokenTypesList } from "../tokens/TokenType";
 import Token from "../tokens/Token";
+import CodeObject from "../Lexer/CodeObject.js";
 
 export default class Lexer {
-  codeObject = {
-    pointer: 0,
-    code: [], //"G00 G43 H1 D1 Z27.0 [#45];",
-    result: "",
-    tokenType: "",
-    shiftPointer() {
-      ++this.pointer;
-    },
-    getCharacter() {
-      return this.code[this.pointer];
-    },
-    clearResult() {
-      this.result = "";
-    },
-    setResult() {
-      this.result += this.getCharacter();
-    },
-    getResult() {
-      return this.result;
-    },
-    getTail() {
-      return this.pointer < 0 ? "" : this.code.slice(this.pointer);
-    },
-    isEndString() {
-      let isEnd = this.code[this.pointer] === undefined;
-      if (isEnd) {
-        this.pointer = -1;
-      }
-      return isEnd;
-    },
-    isResult() {
-      let isResult = this.result.length > 0;
-      if (!isResult) {
-        this.result = undefined;
-      }
-      return isResult;
-    },
-  };
   tokenTypesValues = Object.values(tokenTypesList);
-
+  codeObject;
   constructor(code) {
-    this.codeObject.code = code;
+    this.codeObject = new CodeObject(code);
   }
 
   lexAnalysys = () => {
     let token = undefined;
     let tokens = [];
     if (this.codeObject.code !== undefined) {
-      while (!this.codeObject.isEndString) {
+      while (!this.codeObject.isEndString()) {
         token = this.getToken();
         if (token !== undefined) {
           tokens.push(new Token(token.type, token.text));
@@ -80,7 +43,7 @@ export default class Lexer {
         );
         break;
       }
-      tokenTypePointer = +1;
+      tokenTypePointer += 1;
     }
     return tokenType;
   };

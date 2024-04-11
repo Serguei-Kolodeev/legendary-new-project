@@ -1,10 +1,10 @@
-import LoadFileButton from "../load_file_button";
-import '../header/Header.css'
+import LoadFileButton from "../load_file_button/index";
+import "../header/Header.css";
 
-const Header = ({onProgrammChange} : any) => {
+const Header = ({ onProgrammChange }: any) => {
   return (
     <div className="header">
-      <LoadFileButton onProgrammChange = {onProgrammChange}/>
+      <LoadFileButton onProgrammChange={onProgrammChange} />
     </div>
   );
 };

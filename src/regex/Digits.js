@@ -6,26 +6,21 @@ const isDot = (character) => {
   return /[.]/.test(character);
 };
 
-export const digital1 = (wObj) => {
-  //console.log(wObj)
+export const digital1 = (cObj) => {
   let token = false;
-  //let {pointer, code, result} = wObj;
-  //result = ""
-  while (isDigit(wObj.getCharacter())) {
-    wObj.setResult();
-    wObj.shiftPointer();
+  while (isDigit(cObj.getCharacter())) {
+    cObj.setResult();
+    cObj.shiftPointer();
   }
-  wObj.isEndString();
-  //console.log(wObj.isResult())
-  token = wObj.isResult();
-  //console.log('td: ' + token)
-  if (token) {
-    console.log(wObj.getResult() + " (isDigit) => " + wObj.getTail());
-  }
-  //[wObj.pointer, wObj.result] = [pointer, result]
+  cObj.isEndString();
+  token = cObj.isResult();
+  // if (token) {
+  //   console.log(cObj.getResult() + " (isDigit) => " + cObj.getTail());
+  // }
   return token;
 };
 
+/*
 export const digital = (pointer, inputString) => {
   let obj = {
     result: undefined,
@@ -65,3 +60,4 @@ export const digital = (pointer, inputString) => {
   }
   return [pointer, obj];
 };
+*/

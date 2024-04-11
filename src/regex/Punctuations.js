@@ -26,17 +26,16 @@ const isQuestion = (character) => {
   return /[?]/.test(character);
 };
 
-export const semiColon = (wObj) => {
+export const semiColon = (cObj) => {
   let token = false;
-  if (isSemiColon(wObj.getCharacter())) {
-    wObj.setResult();
-    wObj.shiftPointer();
+  if (isSemiColon(cObj.getCharacter())) {
+    cObj.setResult();
+    cObj.shiftPointer();
   }
-  wObj.isEndString();
-  token = wObj.isResult();
-  //console.log('tc: ' + token)
-  if (token) {
-    console.log(wObj.getResult() + " (isSemicolon) => " + wObj.getTail());
-  }
+  cObj.isEndString();
+  token = cObj.isResult();
+  // if (token) {
+  //   console.log(cObj.getResult() + " (isSemicolon) => " + cObj.getTail());
+  // }
   return token;
 };

@@ -1,19 +1,27 @@
 import React from "react";
 //export let progTextArr : string [] = [];
 
-const LoadFileButton = ({onProgrammChange} : any) => {
-  const ShowFile = React.useCallback(async(e: any) => {
-    e.preventDefault();
-    const reader = new FileReader();
-    reader.onload = async(e) => {
-      const text = e.target?.result?.toString(); //.split(/\n/); //.filter(s => typeof s === 'string') as string[];
-      //console.log(text);
-      if (text !== undefined){
-        onProgrammChange(text);
+const LoadFileButton = ({ onProgrammChange }: any) => {
+  const ShowFile = React.useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      let text;
+      //e.preventDefault();
+      if (!e.target.files) {
+        text = "Файл не выбран";
+        return;
       }
-    }
-    reader.readAsText(e.target.files[0]);
-  }, [onProgrammChange])
+      const reader = new FileReader();
+      reader.readAsText(e.target.files[0]);
+      reader.onload = () => {
+        text = reader.result;
+        console.log(text);
+        if (text !== undefined) {
+          onProgrammChange(text);
+        }
+      };
+    },
+    [onProgrammChange]
+  );
 
   return (
     <div>

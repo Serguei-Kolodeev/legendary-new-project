@@ -1,17 +1,13 @@
-export const otherSymbol = (wObj) => {
-  //console.log(wObj)
+export const otherSymbol = (cObj) => {
   let token = false;
-  //let {pointer, code, result} = wObj;
-  //result = ""
-  wObj.setResult();
-  wObj.shiftPointer();
 
-  wObj.isEndString();
-  //console.log(wObj.isResult())
-  token = wObj.isResult();
-  //console.log('to: ' + token)
-  if (token) {
-    console.log(wObj.getResult() + " (isOtherSymbol) => " + wObj.getTail());
-  }
+  cObj.setResult();
+  cObj.shiftPointer();
+
+  cObj.isEndString();
+  token = cObj.isResult();
+  // if (token) {
+  //   console.log(cObj.getResult() + " (isOtherSymbol) => " + cObj.getTail());
+  // }
   return token;
 };
