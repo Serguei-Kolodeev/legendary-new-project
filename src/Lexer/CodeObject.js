@@ -1,91 +1,62 @@
 export default class CodeObject {
-  pointer = 0;
-  code = [];
-  result = "";
-  tokenType = "";
+  _pointer = 0;
+  _code = [];
+  _result = "";
+  _tokenType;
 
   constructor(code) {
-    this.code = code;
+    this._code = code;
   }
 
   shiftPointer = () => {
-    ++this.pointer;
+    ++this._pointer;
   };
 
   getCharacter = () => {
-    return this.code[this.pointer];
+    return this._code[this._pointer];
   };
 
   clearResult = () => {
-    this.result = "";
+    this._result = "";
   };
 
   setResult = () => {
-    this.result += this.getCharacter();
+    this._result += this.getCharacter();
   };
 
   getResult = () => {
-    return this.result;
+    return this._result;
   };
 
   getTail = () => {
-    return this.pointer < 0 ? "" : this.code.slice(this.pointer);
+    return this._pointer < 0 ? "" : this._code.slice(this._pointer);
   };
 
   isEndString = () => {
-    let isEnd = this.code[this.pointer] === undefined;
+    let isEnd = this._code[this._pointer] === undefined;
     if (isEnd) {
-      this.pointer = -1;
+      this._pointer = -1;
     }
     return isEnd;
   };
 
   isResult = () => {
-    let isResult = this.result.length > 0;
+    let isResult = this._result.length > 0;
     if (!isResult) {
-      this.result = undefined;
+      this._result = undefined;
     }
     return isResult;
   };
-}
 
-/*
-export const codeObject = {
-  pointer: 0,
-  code: [], //"G00 G43 H1 D1 Z27.0 [#45];",
-  result: "",
-  tokenType: "",
-  shiftPointer() {
-    ++this.pointer;
-  },
-  getCharacter() {
-    return this.code[this.pointer];
-  },
-  clearResult() {
-    this.result = "";
-  },
-  setResult() {
-    this.result += this.getCharacter();
-  },
-  getResult() {
-    return this.result;
-  },
-  getTail() {
-    return this.pointer < 0 ? "" : this.code.slice(this.pointer);
-  },
-  isEndString() {
-    let isEnd = this.code[this.pointer] === undefined;
-    if (isEnd) {
-      this.pointer = -1;
-    }
-    return isEnd;
-  },
-  isResult() {
-    let isResult = this.result.length > 0;
-    if (!isResult) {
-      this.result = undefined;
-    }
-    return isResult;
-  },
-};
-*/
+  setTokenType = (type) => {
+    this._tokenType = type;
+  };
+
+  getTokenType = () => {
+    return this._tokenType;
+  };
+
+  isToken = () => {
+    return this._tokenType.regex(this);
+  };
+}

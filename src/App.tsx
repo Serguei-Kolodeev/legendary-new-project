@@ -4,8 +4,10 @@ import ProgrammBody from "./components/programm/ProgrammBody";
 import "../src/App.css";
 
 const App = () => {
-  //const [programmText, setProgrammText] = React.useState("здэся будэ текст программэ");
-  const [programmText, setProgrammText] = React.useState("зб");
+  const [programmText, setProgrammText] = React.useState(
+    "здэся будэ текст программэ"
+  );
+  //const [programmText, setProgrammText] = React.useState("зб");
   return (
     <div className="App">
       {/*<CMPProgramm/>*/}

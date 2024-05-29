@@ -12,11 +12,16 @@ export default class Lexer {
   lexAnalysys = () => {
     let token = undefined;
     let tokens = [];
-    if (this.codeObject.code !== undefined) {
+    if (this.codeObject._code !== undefined) {
       while (!this.codeObject.isEndString()) {
         token = this.getToken();
         if (token !== undefined) {
-          tokens.push(new Token(token.type, token.text));
+          tokens.push(
+            new Token(
+              this.codeObject.getTokenType().type,
+              this.codeObject.getResult()
+            )
+          );
         }
       }
     }
@@ -24,20 +29,20 @@ export default class Lexer {
   };
 
   getToken = () => {
-    let tokenType;
     let tokenTypePointer = 0;
     let isToken = false;
 
     while (this.tokenTypesValues[tokenTypePointer] !== undefined) {
       this.codeObject.clearResult();
-      tokenType = this.tokenTypesValues[tokenTypePointer];
-      isToken = tokenType.regex(this.codeObject);
+      this.codeObject.setTokenType(this.tokenTypesValues[tokenTypePointer]);
+      //tokenType = this.tokenTypesValues[tokenTypePointer];
+      isToken = this.codeObject.isToken(); //tokenType.regex(this.codeObject);
       if (isToken) {
-        tokenType.text = this.codeObject.getResult();
+        //tokenType.text = this.codeObject.getResult();
         console.log(
-          tokenType.name +
+          this.codeObject.getTokenType().type +
             ": " +
-            tokenType.text +
+            this.codeObject.getResult() +
             " => " +
             this.codeObject.getTail()
         );
@@ -45,6 +50,6 @@ export default class Lexer {
       }
       tokenTypePointer += 1;
     }
-    return tokenType;
+    return this.codeObject;
   };
 }
