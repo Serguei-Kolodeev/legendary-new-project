@@ -6,6 +6,8 @@ const ProgrammBody = ({ programmText }: any) => {
   //console.log(text)
   if (text !== undefined) {
     return (
+      //здесь text это текст всей программы
+      //в ProgrammText передается построчно
       <div className="programm_body">
         {text.map((value: string, index: number) => (
           <ProgrammText key={index} text={value} />
