@@ -1,8 +1,6 @@
 export default class InputStream {
   _pointer = 0;
   _input;
-  _result = "";
-  _tokenType;
 
   constructor(input) {
     this._input = input;
