@@ -1,16 +1,22 @@
 export default class InputStream {
   _pointer = 0;
   _input;
+  _current;
 
   constructor(input) {
     this._input = input;
   }
 
   getCurrent = () => {
-    //получаем элемент по текущему указателю
-    let returned = this._input[this._pointer];
+    //получаем элемент по текущему указателю и сдвигаем указатель
+    this._current = this._input[this._pointer];
     this._pointer++;
-    return returned;
+    return this._current;
+  };
+
+  readCurrent = () => {
+    //смотрим элемент по текущему указателю без сдвига указателя
+    return this._current;
   };
 
   readNext = () => {

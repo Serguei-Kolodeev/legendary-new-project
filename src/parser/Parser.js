@@ -24,4 +24,16 @@ export default class Parser extends InputStream {
       console.log(this.getCurrent());
     }
   };
+
+  parseWord = () => {
+    return this.maybeAddress(() => {
+      return maybeAddresValue();
+    });
+  };
+
+  maybeAddress = (expr) => {
+    expr = expr();
+    let token = this.readCurrent();
+    return token.value == "LATINLETTER" ? "ADDRESS" : "NON ADDRESS";
+  };
 }

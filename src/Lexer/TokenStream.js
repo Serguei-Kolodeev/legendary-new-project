@@ -73,4 +73,14 @@ export default class TokenStream {
   readOperand = () => {
     //алгоритм чтения операнда операции
   };
+
+  readStartFile = () => {
+    //алгоритм чтения в начале файла
+    let programm = this.readProgramm();
+  };
+
+  readProgramm = () => {
+    //алгоритм чтения после начала программы
+    let expressions = this.readExpressions();
+  };
 }
