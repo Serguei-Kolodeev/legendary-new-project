@@ -21,22 +21,45 @@ export default class Parser extends InputStream {
 
   getAllTokens = () => {
     while (!this.isEndInput()) {
+      this.parseExpression();
       console.log(this.getCurrent());
     }
   };
 
   parseExpression = () => {
-    return this.maybeCall();
-  };
-
-  parseWord = () => {
-    return this.maybeAddress(() => {
-      return maybeAddresValue();
+    console.log("parseExpression");
+    return this.maybeCall(() => {
+      return this.maybeBinary(this.parseAtom());
     });
   };
 
   maybeCall = (expr) => {
+    console.log("maybeCall");
     expr = expr();
+    return expr;
+  };
+
+  maybeBinary = (left) => {
+    console.log("maybeBinary");
+    return left;
+  };
+
+  parseAtom = () => {
+    console.log("parseAtom");
+    console.log(
+      "type ->" +
+        this.readCurrent().type +
+        ": value ->" +
+        this.readCurrent().value
+    );
+    return this.readCurrent();
+  };
+
+  /*
+  parseWord = () => {
+    return this.maybeAddress(() => {
+      return maybeAddresValue();
+    });
   };
 
   maybeAddress = (expr) => {
@@ -44,4 +67,5 @@ export default class Parser extends InputStream {
     let token = this.readCurrent();
     return token.value == "LATINLETTER" ? "ADDRESS" : "NON ADDRESS";
   };
+  */
 }

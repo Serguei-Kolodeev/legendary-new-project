@@ -16,6 +16,7 @@ export default class InputStream {
 
   readCurrent = () => {
     //смотрим элемент по текущему указателю без сдвига указателя
+    this._current = this._input[this._pointer];
     return this._current;
   };
 
