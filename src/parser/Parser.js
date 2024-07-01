@@ -25,10 +25,18 @@ export default class Parser extends InputStream {
     }
   };
 
+  parseExpression = () => {
+    return this.maybeCall();
+  };
+
   parseWord = () => {
     return this.maybeAddress(() => {
       return maybeAddresValue();
     });
+  };
+
+  maybeCall = (expr) => {
+    expr = expr();
   };
 
   maybeAddress = (expr) => {
