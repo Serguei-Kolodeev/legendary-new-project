@@ -9,8 +9,8 @@ const readStreamSymbols = (symbolsLine: string) => {
   const result = lexer.lexAnalysys();
   console.log(result);
   const parser = new Parser(result);
-  //parser.getAllTokens();
-  parser.parseExpression();
+  parser.getAllTokens();
+  //parser.parseExpression();
   return result;
 };
 
