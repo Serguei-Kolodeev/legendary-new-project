@@ -46,13 +46,32 @@ export default class Parser extends InputStream {
 
   parseAtom = () => {
     console.log("parseAtom");
-    console.log(
-      "type ->" +
-        this.readCurrent().type +
-        ": value ->" +
-        this.readCurrent().value
-    );
-    return this.readCurrent();
+    let token = this.readCurrent();
+    console.log("type ->" + token.type + ": value ->" + token.value);
+    return this.maybeCall(() => {
+      if (token.type == "LATINLETTER") {
+        return this.parseAddress(token);
+      }
+      if (token.type == "MATHOPERATION") {
+        return this.parseUnary(token);
+      }
+      return this.readCurrent();
+    });
+    //return this.readCurrent();
+  };
+
+  parseAddress = (expr) => {
+    console.log("parseAddres");
+    expr = expr();
+    let token = this.readCurrent();
+    console.log("type ->" + token.type + ": value ->" + token.value);
+  };
+
+  parseUnary = (expr) => {
+    console.log("parseUnary");
+    expr = expr();
+    let token = this.readCurrent();
+    console.log("type ->" + token.type + ": value ->" + token.value);
   };
 
   /*
@@ -62,10 +81,6 @@ export default class Parser extends InputStream {
     });
   };
 
-  maybeAddress = (expr) => {
-    expr = expr();
-    let token = this.readCurrent();
-    return token.value == "LATINLETTER" ? "ADDRESS" : "NON ADDRESS";
-  };
+
   */
 }
