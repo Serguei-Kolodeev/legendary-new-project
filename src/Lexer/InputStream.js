@@ -22,7 +22,7 @@ export default class InputStream {
 
   readNext = () => {
     //смотрим следующий элемент
-    return this._input[this._pointer];
+    return this._input[this._pointer + 1];
   };
 
   isEndInput = () => {

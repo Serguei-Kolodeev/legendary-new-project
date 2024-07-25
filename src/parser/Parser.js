@@ -26,6 +26,45 @@ export default class Parser extends InputStream {
     }
   };
 
+  parse = () => {
+    let parseLvlExpr = this.parseL1(); // + или -
+    let token = this.readCurrent();
+    if (token.type == "PLUS" || token.type == "MINUS") {
+      console.log("PLUS MINUS");
+    }
+    return parseLvlExpr;
+  };
+
+  parseL1 = () => {
+    let parseLvl2 = this.parseL2(); // * или /
+    let token = this.readCurrent();
+    if (token.type == "MULT" || token.type == "DIVIDE") {
+      console.log("MULT DIVIDE");
+    }
+    return parseLvl2;
+  };
+
+  parseL2 = () => {
+    //унарный минус
+    let parseLvl3 = this.parseL3();
+    let token = this.readCurrent();
+    if (token.type == "MINUS") {
+      console.log("UNARY MINUS");
+    }
+    return parseLvl3;
+  };
+
+  parseL3 = () => {
+    // () или число
+    let token = this.readCurrent();
+    if (token.type == "OPENSQUAREBRACKET") {
+      console.log("[");
+    }
+    if (token.type == "NUMBER") {
+      console.log("PLUS MINUS");
+    }
+  };
+
   parseExpression = () => {
     console.log("parseExpression");
     return this.maybeCall(() => {
@@ -45,26 +84,42 @@ export default class Parser extends InputStream {
   };
 
   parseAtom = () => {
-    console.log("parseAtom");
+    //console.log("parseAtom");
     let token = this.readCurrent();
-    console.log("type ->" + token.type + ": value ->" + token.value);
+    //console.log("parseAtom -> type ->" + token.type + ": value ->" + token.value);
     return this.maybeCall(() => {
       if (token.type == "LATINLETTER") {
-        return this.parseAddress(token);
+        return this.parseAddress();
       }
       if (token.type == "MATHOPERATION") {
-        return this.parseUnary(token);
+        //return this.parseUnary(token);
       }
       return this.readCurrent();
     });
     //return this.readCurrent();
   };
 
-  parseAddress = (expr) => {
-    console.log("parseAddres");
-    expr = expr();
-    let token = this.readCurrent();
-    console.log("type ->" + token.type + ": value ->" + token.value);
+  parseAddress = () => {
+    //console.log("parseAddres");
+    let expr;
+    let nextToken = this.readNext();
+    if (nextToken.type == "NUMBER") {
+      expr = {
+        WORD: {
+          TYPE: "WORD",
+          ADDRESS: this.getCurrent(),
+          VALUE: this.getCurrent(),
+        },
+      };
+    }
+    console.log(
+      "parseAddres -> type ->" +
+        expr.WORD.TYPE +
+        ": value ->" +
+        expr.WORD.ADDRESS.value +
+        expr.WORD.VALUE.value
+    );
+    return expr;
   };
 
   parseUnary = (expr) => {
