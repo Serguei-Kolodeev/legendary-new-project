@@ -27,34 +27,34 @@ export default class Parser extends InputStream {
   };
 
   parse = () => {
-    let parseLvlExpr = this.parseL1(); // + или -
+    let result = this.plusMinus(); // + или -
     let token = this.readCurrent();
     if (token.type == "PLUS" || token.type == "MINUS") {
       console.log("PLUS MINUS");
     }
-    return parseLvlExpr;
+    return result;
   };
 
-  parseL1 = () => {
-    let parseLvl2 = this.parseL2(); // * или /
+  plusMinus = () => {
+    let result = this.mulDiv(); // * или /
     let token = this.readCurrent();
     if (token.type == "MULT" || token.type == "DIVIDE") {
       console.log("MULT DIVIDE");
     }
-    return parseLvl2;
+    return result;
   };
 
-  parseL2 = () => {
+  mulDiv = () => {
     //унарный минус
-    let parseLvl3 = this.parseL3();
+    let result = this.bracket();
     let token = this.readCurrent();
     if (token.type == "MINUS") {
       console.log("UNARY MINUS");
     }
-    return parseLvl3;
+    return result;
   };
 
-  parseL3 = () => {
+  bracket = () => {
     // () или число
     let token = this.readCurrent();
     if (token.type == "OPENSQUAREBRACKET") {
@@ -63,6 +63,12 @@ export default class Parser extends InputStream {
     if (token.type == "NUMBER") {
       console.log("PLUS MINUS");
     }
+  };
+
+  varDig = () => {
+    let result;
+
+    return result;
   };
 
   parseExpression = () => {
